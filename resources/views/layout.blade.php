@@ -10,7 +10,15 @@
     <meta name="author" content="">
 
     <title>Management</title>
+    <link rel="stylesheet" type="text/css" href="{{asset('https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css')}}">
+{{--    <script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>--}}
+{{--    <script src="{{asset('https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js')}}"></script>--}}
+{{--    <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.css" rel="stylesheet">--}}
+{{--    <link rel="stylesheet" href="{{asset('https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css')}}" />--}}
 
+
+
+{{--    <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.js"></script>--}}
     <!-- Custom fonts for this template-->
     <link href="{{asset("vendor/fontawesome-free/css/all.min.css")}}" rel="stylesheet" type="text/css">
     <link
@@ -19,7 +27,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset("css/sb-admin-2.min.css")}}" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -57,11 +65,18 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Manage </h6>
+{{--                    @can('access-employees')--}}
                     <a class="collapse-item" href="{{route('employees.index')}}">Employees</a>
+{{--                    @endcan--}}
+{{--                    @can('access-projects')--}}
                     <a class="collapse-item" href="{{route('projects.index')}}">Projects</a>
+{{--                    @endcan--}}
+{{--                        @can('access-tasks')--}}
                     <a class="collapse-item" href="{{route('tasks.index')}}">Tasks</a>
+{{--                    @endcan--}}
+{{--                            @can('access-programmingLanguage')--}}
                     <a class="collapse-item" href="{{route('programmingLanguages.index')}}">Programming Languages</a>
-
+{{--                    @endcan--}}
                 </div>
             </div>
         </li>
@@ -78,16 +93,20 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Employees</span>
+                <span>Notifications</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Assign to employee:</h6>
-                    <a class="collapse-item" href="buttons.html">Project</a>
-                    <a class="collapse-item" href="{{url('cards')}}">Task</a>
-                    <a class="collapse-item" href="{{url('cards')}}">Programming Language</a>
+                    <h6 class="collapse-header">Notification:</h6>
+                    <a class="collapse-item" href="{{route('custom-notifications.index')}}">Custom Notifications</a>
                 </div>
             </div>
+
+            {{--                    <a class="collapse-item" href="buttons.html">Project</a>--}}
+{{--                    <a class="collapse-item" href="{{url('cards')}}">Task</a>--}}
+{{--                    <a class="collapse-item" href="{{url('cards')}}">Programming Language</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
@@ -135,18 +154,32 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
+                <span>Authentication:</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" href="login.html">Login</a>
-                    <a class="collapse-item" href="register.html">Register</a>
-                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                    <h6 class="collapse-header">Auth Screens:</h6>
+                    @can('access-roles')
+                    <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>
+                    @endcan
+{{--                    <a class="collapse-item" href="{{route('auth.login')}}">Login</a>--}}
+{{--                    <a class="collapse-item" href="{{route('users.index')}}">Users</a>--}}
+                   @can('access-users')
+                    <a class="collapse-item" href="{{route('users.index')}}">Users</a>
+                    @endcan
+
+{{--                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">--}}
+{{--                        <div class="bg-white py-2 collapse-inner rounded">--}}
+{{--                            <h6 class="collapse-header">Notification:</h6>--}}
+
+
+{{--                    @can('access-users')--}}
+{{--                    <a class="collapse-item" href="{{route('custom-notifications.index')}}">Custom Notifications</a>--}}
+{{--                    @endcan--}}
                     <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item" href="blank.html">Blank Page</a>
+{{--                    <h6 class="collapse-header">Other Pages:</h6>--}}
+{{--                    <a class="collapse-item" href="{{route('users.index')}}">Users</a>--}}
+{{--                    <a class="collapse-item" href="blank.html">Blank Page</a>--}}
                 </div>
             </div>
         </li>
@@ -155,14 +188,14 @@
         <li class="nav-item">
             <a class="nav-link" href="charts.html">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
+                <span>Display</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
             <a class="nav-link" href="tables.html">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+                <span>Control</span></a>
         </li>
 
         <!-- Divider -->
@@ -259,7 +292,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-dark" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-secondary" href="login.html">Logout</a>
+{{--                <a class="btn btn-secondary" href="login.html">Logout</a>--}}
             </div>
         </div>
     </div>
@@ -269,6 +302,8 @@
 <script src="{{asset("vendor/jquery/jquery.min.js")}}"></script>
 <script src="{{asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
 
+{{--<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js')}}"></script>--}}
+<script src="{{asset('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js')}}"></script>
 <!-- Core plugin JavaScript-->
 <script src="{{asset("vendor/jquery-easing/jquery.easing.min.js")}}"></script>
 
@@ -282,6 +317,26 @@
 <script src="{{asset("js/demo/chart-area-demo.js")}}"></script>
 <script src="{{asset("js/demo/chart-pie-demo.js")}}"></script>
 
-</body>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>
+@include('shared.fcm')
+<script>
+    $(document).ready(function () {
+        $('.select2').select2();
+    });
+</script>
+@yield('scripts')
 
+<script>
+
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+
+</script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </html>

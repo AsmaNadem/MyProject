@@ -17,7 +17,7 @@ class Project extends Model
         return $this->belongsToMany(Task::class,'project_tasks');
     }
 
-    public function programming_Languages()
+    public function programmingLanguages()
     {
         return $this->belongsToMany(ProgrammingLanguage::class,'project_programming_languages');
     }

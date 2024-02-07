@@ -57,6 +57,10 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'frontend_url' => env('FRONTEND_URL', 'http://localhost:3000'),
+
+    'frontend_url' => env('FRONTEND_URL', 'http://localhost:3000'),
+
     'asset_url' => env('ASSET_URL'),
 
     /*
@@ -168,6 +172,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -182,6 +189,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

@@ -14,6 +14,16 @@ class ProgrammingLanguageController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+//        $this->middleware('permission:access-programming_languages', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create-programming_languages', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update-programming_languages', ['only' => ['edit', 'store']]);
+        $this->middleware('permission:delete-programming_languages', ['only' => ['destroy']]);
+
+    }
+
     public function index()
     {
         $programmingLanguages =  ProgrammingLanguage::all();
@@ -89,6 +99,7 @@ class ProgrammingLanguageController extends Controller
             'name'=>$request->name,
             'image'=>$bath
         ]);
+        toastr()->success('Record updated successfully');
         return redirect(route('programmingLanguages.index'));
 
     }
@@ -104,6 +115,8 @@ class ProgrammingLanguageController extends Controller
             $programmingLanguage->delete();
 
         }
+        toastr()->success("Record deleted successfully");
+//        toastr()->success('Record deleted successfully');
         return redirect(route('programmingLanguages.index'));
     }
 

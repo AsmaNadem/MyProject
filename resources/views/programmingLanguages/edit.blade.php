@@ -3,7 +3,8 @@
 
     <h4 class="ml-2 mb-3 mt-5" style="color: #3a3b45">Update Programming Language</h4>
 
-    <form class="mx-5" method="post" action="{{route('programmingLanguages.update',$programmingLanguage)}}">
+    <form class="mx-5" method="post"
+          enctype="multipart/form-data"  action="{{route('programmingLanguages.update',$programmingLanguage)}}">
         @csrf
         @method('put')
         <div class="form-group">
@@ -17,7 +18,7 @@
 
         <div class="form-group">
             <label for="image" style="color: #3a3b45">Image</label>
-            <input type="file" value="{{old('programmingLanguage',$programmingLanguage)}}" name="programmingLanguage" class="form-control @error('programmingLanguage') is-invalid @enderror" placeholder="Update image" id="programmingLanguage">
+            <input type="file" value="{{old('image',$programmingLanguage)}}" name="image" class="form-control @error('image') is-invalid @enderror" placeholder="Update image" id="image">
 
 
         </div>

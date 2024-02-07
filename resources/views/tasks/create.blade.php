@@ -7,8 +7,8 @@
         @csrf
 
 <div class="form-group">
-    <label for="name" style="color: #3a3b45">Task Name:</label>
-    <input type="text" value="{{old('name')}}" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter your name" id="name">
+    <label for="task_name" style="color: #3a3b45">Task Name:</label>
+    <input type="text" value="{{old('task_name')}}" name="task_name" class="form-control @error('task_name') is-invalid @enderror" placeholder="Enter your name" id="task_name">
 
 </div>
         @error('task_name')
@@ -16,8 +16,8 @@
         @enderror
 
         <div class="form-group">
-            <label for="date" style="color: #3a3b45">Date:</label>
-            <input type="date" name="date" id="date" value="{{old('date')}}" class="form-control @error('date') is-invalid @enderror">
+            <label for="start_date" style="color: #3a3b45">Date:</label>
+            <input type="date" name="start_date" id="start_date" value="{{old('start_date')}}" class="form-control @error('start_date') is-invalid @enderror">
 
         </div>
         @error('start_date')
@@ -35,11 +35,11 @@
         @enderror
 
         <div class="form-group">
-            <label for="task" style="color: #3a3b45">Task Status:</label>
-            <select class="form-control" name="task" id="">
+            <label for="task_status" style="color: #3a3b45">Task Status:</label>
+            <select class="form-control" name="task_status" id="task_status">
 {{--                <option value="">Select task status</option>--}}
-                <option value="">Active</option>
-                <option value="">Non-active</option>
+                <option value="Active" selected>Active</option>
+                <option value="Non-active">Non-active</option>
 
             </select>
             @error('task_status')
@@ -48,11 +48,35 @@
 
 
 <hr>
+
+{{--            <div class="form-group">--}}
+
+{{--                <label for="project_id" style="color: #3a3b45">Employee:</label>--}}
+{{--                <select class="form-select form-select-lg mb-3"  aria-label=".form-select-lg example" name="project_id" id="project_id">--}}
+{{--                    <option selected value="">Select Employee</option>--}}
+{{--                    @foreach($employees as $employee)--}}
+{{--                        <option value="{{$employee->id}}">{{$employee->name}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--            </div>--}}
+
+{{--            <div class="form-group">--}}
+
+{{--                <label for="employee_id" style="color: #3a3b45">Employee:</label>--}}
+{{--                <select class="form-control select2 form-select-lg mb-3"  name="employee_id" aria-label=".form-select-lg example"  id="employee_id">--}}
+
+{{--                    @foreach($employees as $employee)--}}
+{{--                        <option value="{{$employee->id}}">{{$employee->name}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--            </div>--}}
+
+
             <div class="form-group">
 
                 <label for="project_id" style="color: #3a3b45">Project:</label>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="project_id" id="project_id">
-                    <option selected value="">Select project</option>
+                <select class="form-control select2 form-select-lg mb-3" multiple name="projects[]" aria-label=".form-select-lg example"  id="project_id">
+
                     @foreach($projects as $project)
                         <option value="{{$project->id}}">{{$project->name}}</option>
                     @endforeach

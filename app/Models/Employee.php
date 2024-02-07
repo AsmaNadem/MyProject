@@ -9,14 +9,14 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $guarded=['id','created_at','user_id'];
+    protected $fillable = ['user_id','programming_language_id','project_id'];
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->belongsToMany(Task::class,'employee_tasks');
     }
 
-    public function programming_Languages()
+    public function programmingLanguages()
     {
         return $this->belongsToMany(ProgrammingLanguage::class,'employee_programming_languages');
     }
@@ -28,7 +28,7 @@ class Employee extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
 }

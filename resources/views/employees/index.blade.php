@@ -2,11 +2,11 @@
 
 @section('content')
 
-<h3 class="ml-2 mb-3 mt-5" style="color: #3a3b45">Employees</h3>
-
+<h3 class="ml-2 mb-3 mt-5" style="color: #3a3b45">Assigned to employees</h3>
+@can('create-employees')
 <a href="{{route('employees.create')}}" class="btn btn-secondary float-right mb-5  mr-5">Create</a>
 
-
+@endcan
 <table class="table table-striped">
 
     <thead>
@@ -16,10 +16,14 @@
         <th scope="col" style="color: #3a3b45">Employee CV</th>
         <th scope="col" style="color: #3a3b45">Employee Number</th>
         <th scope="col" style="color: #3a3b45">Date</th>
-        <th scope="col" style="color: #3a3b45">Project</th>
-        <th scope="col" style="color: #3a3b45">Task</th>
-        <th scope="col" style="color: #3a3b45">Programming Language</th>
+        <th scope="col" style="color: #3a3b45">Employee name</th>
+        <th scope="col" style="color: #3a3b45">Programming Languages</th>
+        <th scope="col" style="color: #3a3b45">Projects</th>
+        <th scope="col" style="color: #3a3b45">Tasks</th>
         <th scope="col" style="color: #3a3b45">Action</th>
+        <th></th>
+        <th></th>
+<th></th>
     </tr>
     </thead>
     <tbody>
@@ -30,15 +34,25 @@
         <td>{{$employee->employee_CV}}</td>
         <td>{{$employee->employee_number}}</td>
         <td>{{$employee->employee_date}}</td>
+        <td>{{$employee->user?->name??"not found"}}</td>
+        <td>@foreach($employee->programmingLanguages as $lang) {{$lang->name}} @endforeach  </td>
+        <td>@foreach($employee->projects as $lang) {{$lang->name}} @endforeach  </td>
+        <td>@foreach($employee->tasks as $lang) {{$lang->name}} @endforeach  </td>
+        <td>{{$employee->project?->name??"not Found"}}</td>
+
 
         <td style="width:180px;">
+            @can('update-employees')
             <a href="{{route('employees.edit',$employee)}}">
+
                 <span class="btn btn-outline-success btn-sm font-1 mx1">
                 <span class="fas fa-wrench"></span>Edit
                     </span>
             </a>
-{{--        </td>--}}
-{{--        <td>--}}
+            @endcan
+        </td>
+        <td>
+                @can('delete-employees')
         <form action="{{route('employees.destroy',$employee)}}"
              class="d-inline-block" method="post">
             @csrf
@@ -50,7 +64,7 @@
                 <span class="fas fa-trash">Delete</span>
             </button>
         </form>
-
+                @endcan
 
         </td>
     </tr>

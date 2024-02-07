@@ -9,7 +9,7 @@
         <div class="form-group mt-5">
             <label for="name">Name</label>
             <input type="text" value="{{old('name')}}"
-                   accept="image/*" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter programming language name" id="name">
+                    name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter programming language name" id="name">
 
 
             @error('name')

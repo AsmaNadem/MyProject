@@ -3,9 +3,9 @@
 @section('content')
 
     <h4 class="ml-2 mb-3 mt-5" style="color: #3a3b45">Programming Languages</h4>
-
+@can('access-programming_languages')
     <a href="{{route('programmingLanguages.create')}}" class="btn btn-secondary mb-5 mr-3 float-right">Create</a>
-
+@endcan
     <table class="table table-striped">
 
         <thead>
@@ -24,17 +24,20 @@
 
                 <td>{{$programmingLanguage->id}}</td>
                 <td>{{$programmingLanguage->name}}</td>
-                <td><img src="{{url('storage/'.$programmingLanguage->image)}}"></td>
+                <td><img width="100" src="{{url('storage/'.$programmingLanguage->image)}}"></td>
 
 
 
                 <td style="width:180px;">
+                    @can('update-programming_languages')
                     <a href="{{route('programmingLanguages.edit',$programmingLanguage)}}">
                 <span class="btn btn-outline-success btn-sm font-1 mx1">
                 <span class="fas fa-wrench"></span>Edit
                     </span>
                     </a>
+                    @endcan
 
+                    @can('delete-programming_languages')
                     <form action="{{route('programmingLanguages.destroy',$programmingLanguage)}}"
                           class="d-inline-block" method="post">
                         @csrf
@@ -46,6 +49,7 @@
                             <span class="fas fa-trash">Delete</span>
                         </button>
                     </form>
+                        @endcan
                     {{--        <td><button class="btn btn-danger">Delete</button></td>--}}
 
                 </td>

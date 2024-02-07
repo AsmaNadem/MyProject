@@ -23,7 +23,7 @@ class StoreProgrammingLanguageRequest extends FormRequest
     {
         return [
             'name'=>'required|max:255',
-            'image'=>'required|max:255',
+            'image'=>'required|max:255|max:51120',
 
         ];
     }
